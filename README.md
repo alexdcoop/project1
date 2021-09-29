@@ -1,3 +1,3 @@
-# assignment1BZAN545
+# Project 1
 
-This is the repository for assignment 1 in BZAN 545.
+This is the repository for project in BZAN 545.
