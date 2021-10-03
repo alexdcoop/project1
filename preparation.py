@@ -3,8 +3,15 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+
 #Read in the data
 DATA = pd.read_csv('https://raw.githubusercontent.com/alexdcoop/project1/main/fivesecbars.csv?token=AVII23MICGV4GPU7M72T3JTBLH4NG')
+
+#Adding a column converting epoch time to date time
+
+DATA['time'] = pd.to_datetime(DATA['epochtime'],unit='s')
+
+
 
 #Making a seperate dataframe per ticker ID
 TICKER0= DATA.loc[DATA['tickerid']==0]
@@ -14,25 +21,39 @@ TICKER3= DATA.loc[DATA['tickerid']==3]
 TICKER4= DATA.loc[DATA['tickerid']==4]
 
 #Plotting The opening epoch price by time in groups. 
-plt.subplot(1,2,1)
-sns.lineplot(data=TICKER0, x="epochtime", y="open")
+
+#This data is over a week
+sns.lineplot(data=TICKER0, x="time", y="open")
+plt.xticks(rotation=45)
 plt.title('Ticker0')
+plt.ylabel('Price')
+plt.show()
+
+#The rest of these plots are over 1 day
+plt.subplot(1,2,1)
+sns.lineplot(data=TICKER1, x="time", y="open")
+plt.xticks(rotation=45)
+plt.title('Ticker1')
+plt.ylabel('Price')
+
 
 plt.subplot(1,2,2)
-sns.lineplot(data=TICKER1, x="epochtime", y="open")
-plt.title('Ticker1')
+sns.lineplot(data=TICKER2, x="time", y="open")
+plt.xticks(rotation=45)
+plt.title('Ticker2')
+plt.ylabel('Price')
 plt.show()
 
 plt.subplot(1,2,1)
-sns.lineplot(data=TICKER2, x="epochtime", y="open")
-plt.title('Ticker2')
+sns.lineplot(data=TICKER3, x="time", y="open")
+plt.xticks(rotation=45)
+plt.title('Ticker3')
+plt.ylabel('Price')
 
 plt.subplot(1,2,2)
-sns.lineplot(data=TICKER3, x="epochtime", y="open")
-plt.title('Ticker3')
-plt.show()
-
-sns.lineplot(data=TICKER4, x="epochtime", y="open")
+sns.lineplot(data=TICKER4, x="time", y="open")
+plt.xticks(rotation=45)
 plt.title('Ticker4')
+plt.ylabel('Price')
 plt.show() 
 
