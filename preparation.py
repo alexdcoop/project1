@@ -79,4 +79,38 @@ predictedValues = regr.predict(X.head(1000))
 
 #plot predicted values vs. actual values
 
+#KEVIN's work
+from sklearn import linear_model, preprocessing
+import sklearn as sklearn
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+le= preprocessing.LabelEncoder()
+weightedprice=le.fit_transform(list(DATA['weightedavgprice']))
+time=le.fit_transform(list(DATA['time']))
+volume=le.fit_transform(list(DATA['volume']))
+open=le.fit_transform(list(DATA['open']))
+low=le.fit_transform(list(DATA['low']))
+high=le.fit_transform(list(DATA['high']))
+close=le.fit_transform(list(DATA['close']))
+epoch=le.fit_transform(list(DATA['epochtime']))
+tickerid=le.fit_transform(list(DATA['tickerid']))
+
+X= list(zip(epoch, volume, open, low, high,tickerid))
+Y= list(close)
+
+x_train, x_test, y_train,y_test=sklearn.model_selection.train_test_split(X,Y, test_size=0.2, random_state = 0)
+
+knn = KNeighborsClassifier(n_neighbors=3)
+knn.fit(x_train,y_train) #fit model to training set
+
+acc=model.score(x_test,y_test) 
+print(acc)  #accuracy on training data
+
+y_pred = knn.predict(x_test)
+
+y_pred
+
+print("Model accuracy score: {0:0.4f}".format(accuracy_score(y_test, y_pred)) )   #Model test accuracy 
+
 
