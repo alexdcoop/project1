@@ -1,11 +1,11 @@
 #This is our project python file
 import pandas as pd
+from pandas.core.accessor import CachedAccessor
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 #Read in the data
-#DATA = pd.read_csv('https://raw.githubusercontent.com/alexdcoop/project1/main/fivesecbars.csv?token=AVII23MICGV4GPU7M72T3JTBLH4NG')
 DATA = pd.read_csv('fivesecbars.csv')
 
 #Adding a column converting epoch time to date time
@@ -57,4 +57,26 @@ plt.xticks(rotation=45)
 plt.title('Ticker4')
 plt.ylabel('Price')
 plt.show() 
+
+# Support vector machine - Alex Cooper
+from sklearn import svm
+
+#Create X features
+feature_cols = ["open","high","low","close","volume"]
+X = DATA.loc[:,feature_cols]
+
+#Create response vector
+Y = DATA.weightedavgprice
+
+#Build SVR model
+regr = svm.SVR(cache_size=1000)
+regr.fit(X,Y)
+
+#Predict values
+predictedValues = regr.predict(X.head(1000))
+
+####add some visualization from predicted values below
+
+#plot predicted values vs. actual values
+
 
