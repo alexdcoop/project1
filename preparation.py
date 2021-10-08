@@ -73,7 +73,9 @@ regr = svm.SVR(cache_size=1000)
 regr.fit(X,Y)
 
 #Predict values
-predictedValues = regr.predict(head(X,1000))
+predictedValues = regr.predict(X.head(1000))
+
+####add some visualization from predicted values below
 
 #plot predicted values vs. actual values
 
