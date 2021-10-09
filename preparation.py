@@ -113,4 +113,58 @@ y_pred
 
 print("Model accuracy score: {0:0.4f}".format(accuracy_score(y_test, y_pred)) )   #Model test accuracy 
 
+#regression - Noah
+TICKER0
+from sklearn import linear_model, preprocessing
 
+#original regression
+x = TICKER0['time']
+y = TICKER0['weightedavgprice']
+
+model = LinearRegression().fit(x, y)
+r_sq = model.score(x, y)
+print('coefficient of determination:', r_sq)
+print('intercept:', model.intercept_)
+print('slope:', model.coef_)
+
+#kevin regression
+x = DATA.iloc[:,1].values.reshape(-1,1)
+y = DATA.iloc[:,7].values.reshape(-1,1)
+
+linear_regressor = LinearRegression()
+linear_regressor(x,y)
+y.pred = linear_regressor(x)
+plt.scatter(x,y)
+plt.show(x,y.pred, color = 'red')
+plt.show()
+
+#regression -- predicting for ticker 0 
+#predicting 10 values into the future
+print(DATA)
+print(TICKER0)
+
+newticker0 = TICKER0[['weightedavgprice']]
+
+import pandas_ta
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
+
+newticker0.ta.ema(close = 'weighted_avgprice',length = 10, append = True)
+print(newticker0.head(10))
+
+newticker0 = newticker0.iloc[10:]
+print(newticker0.head(10))
+
+X_train, X_test, y_train, y_test = train_test_split(newticker0[['weightedavgprice']], newticker0[['EMA_10']],test_size=.2)
+print(X_test.describe())
+print(X_train.describe())
+
+model = LinearRegression()
+model.fit(X_train,y_train)
+
+y_pred = model.predict(X_test)
+
+
+print("Model Coefficients:", model.coef_)
+print("Mean Absolute Error:", mean_absolute_error(y_test, y_pred))
+print("Coefficient of Determination:", r2_score(y_test, y_pred))
