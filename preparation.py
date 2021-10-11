@@ -104,7 +104,7 @@ x_train, x_test, y_train,y_test=sklearn.model_selection.train_test_split(X,Y, te
 knn = KNeighborsClassifier(n_neighbors=3)
 knn.fit(x_train,y_train) #fit model to training set
 
-acc=model.score(x_test,y_test) 
+acc=knn.score(x_test,y_test) 
 print(acc)  #accuracy on training data
 
 y_pred = knn.predict(x_test)
