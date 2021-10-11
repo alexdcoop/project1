@@ -115,8 +115,46 @@ print("Model accuracy score: {0:0.4f}".format(accuracy_score(y_test, y_pred)) ) 
 
 results=pd.DataFrame(x_test)
 results['pred']=y_pred
-results=results.head(10)
 results.rename(columns={0: "epoch", 1: "volume",2:'open',3:'low',4:'high',5:'tickerid'})
+results1=results.loc[results[5] == 0]
+results1=results1.sort_values(by=0,ascending=True)
+sns.lineplot(data=results1, x=0, y="pred")
+plt.xticks(rotation=45)
+plt.title('time')
+plt.ylabel('Price')
+plt.show()
+
+results2=results.loc[results[5] == 1]
+results2=results2.sort_values(by=0,ascending=True)
+sns.lineplot(data=results2, x=0, y="pred")
+plt.xticks(rotation=45)
+plt.title('time')
+plt.ylabel('Price')
+plt.show()
+
+results3=results.loc[results[5] == 2]
+results3=results3.sort_values(by=0,ascending=True)
+sns.lineplot(data=results3, x=0, y="pred")
+plt.xticks(rotation=45)
+plt.title('time')
+plt.ylabel('Price')
+plt.show()
+
+results4=results.loc[results[5] == 3]
+results4=results4.sort_values(by=0,ascending=True)
+sns.lineplot(data=results4, x=0, y="pred")
+plt.xticks(rotation=45)
+plt.title('time')
+plt.ylabel('Price')
+plt.show()
+
+results5=results.loc[results[5] == 4]
+results5=results5.sort_values(by=0,ascending=True)
+sns.lineplot(data=results5, x=0, y="pred")
+plt.xticks(rotation=45)
+plt.title('time')
+plt.ylabel('Price')
+plt.show()
 
 #regression - Noah
 TICKER0
