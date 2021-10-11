@@ -78,7 +78,7 @@ predictedValues = regr.predict(X.head(1000))
 ####add some visualization from predicted values below
 
 #plot predicted values vs. actual values
-
+ #############################################################   Main model  #############################################################################
 #KEVIN's work
 from sklearn import linear_model, preprocessing
 import sklearn as sklearn
@@ -120,7 +120,7 @@ Y= list(close)
 
 x_train, x_test, y_train,y_test=sklearn.model_selection.train_test_split(X,Y, test_size=0.2, random_state = 0)
 
-knn = KNeighborsClassifier(n_neighbors=3)
+knn = KNeighborsClassifier(n_neighbors=1)
 knn.fit(x_train,y_train) #fit model to training set
 
 acc=knn.score(x_test,y_test) 
@@ -133,7 +133,7 @@ y_pred
 print("Model accuracy score: {0:0.4f}".format(accuracy_score(y_test, y_pred)) )   #Model test accuracy 
 
 #Cross validation
-knn_cv = KNeighborsClassifier(n_neighbors=3)
+knn_cv = KNeighborsClassifier(n_neighbors=1)
 #train model with cv of 5 
 cv_scores = cross_val_score(knn_cv, X, Y, cv=10)
 #print each cv score (accuracy) and average them
@@ -145,6 +145,11 @@ results.rename(columns={0: "epoch", 1: "volume",2:'open',3:'low',4:'high',5:'tic
 
 results1=results.loc[results[5] == 0]
 results1=results1.sort_values(by=0,ascending=True)
+
+
+
+
+
 
 plt.subplot(1,2,2)
 sns.lineplot(data=results1, x=0, y="pred")
