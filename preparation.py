@@ -139,48 +139,95 @@ cv_scores = cross_val_score(knn_cv, X, Y, cv=10)
 #print each cv score (accuracy) and average them
 print(cv_scores)
 
-
 results=pd.DataFrame(x_test)
 results['pred']=y_pred
 results.rename(columns={0: "epoch", 1: "volume",2:'open',3:'low',4:'high',5:'tickerid'})
+
 results1=results.loc[results[5] == 0]
 results1=results1.sort_values(by=0,ascending=True)
+
+plt.subplot(1,2,2)
 sns.lineplot(data=results1, x=0, y="pred")
 plt.xticks(rotation=45)
-plt.title('time')
+plt.title('Ticker0 Prediction')
 plt.ylabel('Price')
+plt.xlabel('time')
+
+plt.subplot(1,2,1)
+sns.lineplot(data=TICKER0, x="time", y="open")
+plt.xticks(rotation=45)
+plt.title('Ticker0')
+plt.ylabel('Price')
+plt.xlabel('time')
 plt.show()
+
 
 results2=results.loc[results[5] == 1]
 results2=results2.sort_values(by=0,ascending=True)
+plt.subplot(1,2,2)
 sns.lineplot(data=results2, x=0, y="pred")
 plt.xticks(rotation=45)
-plt.title('time')
+plt.title('Ticker1 Prediction')
 plt.ylabel('Price')
+plt.xlabel('time')
+
+plt.subplot(1,2,1)
+sns.lineplot(data=TICKER1, x="time", y="open")
+plt.xticks(rotation=45)
+plt.title('Ticker1')
+plt.ylabel('Price')
+plt.xlabel('time')
 plt.show()
 
 results3=results.loc[results[5] == 2]
 results3=results3.sort_values(by=0,ascending=True)
+plt.subplot(1,2,2)
 sns.lineplot(data=results3, x=0, y="pred")
 plt.xticks(rotation=45)
-plt.title('time')
+plt.title('Ticker2 Prediction')
 plt.ylabel('Price')
+plt.xlabel('time')
+
+plt.subplot(1,2,1)
+sns.lineplot(data=TICKER2, x="time", y="open")
+plt.xticks(rotation=45)
+plt.title('Ticker2')
+plt.ylabel('Price')
+plt.xlabel('time')
 plt.show()
 
 results4=results.loc[results[5] == 3]
 results4=results4.sort_values(by=0,ascending=True)
+plt.subplot(1,2,2)
 sns.lineplot(data=results4, x=0, y="pred")
 plt.xticks(rotation=45)
-plt.title('time')
+plt.title('Ticker3 Prediction')
 plt.ylabel('Price')
+plt.xlabel('time')
+
+plt.subplot(1,2,1)
+sns.lineplot(data=TICKER3, x="time", y="open")
+plt.xticks(rotation=45)
+plt.title('Ticker3')
+plt.ylabel('Price')
+plt.xlabel('time')
 plt.show()
 
 results5=results.loc[results[5] == 4]
 results5=results5.sort_values(by=0,ascending=True)
+plt.subplot(1,2,2)
 sns.lineplot(data=results5, x=0, y="pred")
 plt.xticks(rotation=45)
-plt.title('time')
+plt.title('Ticker4 Prediction')
 plt.ylabel('Price')
+plt.xlabel('time')
+
+plt.subplot(1,2,1)
+sns.lineplot(data=TICKER4, x="time", y="open")
+plt.xticks(rotation=45)
+plt.title('Ticker4')
+plt.ylabel('Price')
+plt.xlabel('time')
 plt.show()
 
 
