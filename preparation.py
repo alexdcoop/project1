@@ -113,6 +113,11 @@ y_pred
 
 print("Model accuracy score: {0:0.4f}".format(accuracy_score(y_test, y_pred)) )   #Model test accuracy 
 
+results=pd.DataFrame(x_test)
+results['pred']=y_pred
+results=results.head(10)
+results.rename(columns={0: "epoch", 1: "volume",2:'open',3:'low',4:'high',5:'tickerid'})
+
 #regression - Noah
 TICKER0
 from sklearn import linear_model, preprocessing
