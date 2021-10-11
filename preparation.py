@@ -96,6 +96,25 @@ close=le.fit_transform(list(DATA['close']))
 epoch=le.fit_transform(list(DATA['epochtime']))
 tickerid=le.fit_transform(list(DATA['tickerid']))
 
+#alex CV
+from sklearn.model_selection import GridSearchCV
+
+knn2 = KNeighborsClassifier()
+
+param_grid = {'n_neighbors': np.arange(1,25)}
+
+knn_gscv = GridSearchCV(knn2, param_grid=param_grid, cv=5)
+
+#fit knn
+knn_gscv.fit(x_train,y_train)
+
+#check accuracy
+knn_gscv.score(x_test,y_test) 
+
+#top performing n_neighbors value
+knn_gscv.best_params_
+
+
 X= list(zip(epoch, volume, open, low, high,tickerid))
 Y= list(close)
 
@@ -113,10 +132,21 @@ y_pred
 
 print("Model accuracy score: {0:0.4f}".format(accuracy_score(y_test, y_pred)) )   #Model test accuracy 
 
+#Cross validation
+knn_cv = KNeighborsClassifier(n_neighbors=3)
+#train model with cv of 5 
+cv_scores = cross_val_score(knn_cv, X, Y, cv=10)
+#print each cv score (accuracy) and average them
+print(cv_scores)
+
+
 results=pd.DataFrame(x_test)
 results['pred']=y_pred
 results=results.head(10)
 results.rename(columns={0: "epoch", 1: "volume",2:'open',3:'low',4:'high',5:'tickerid'})
+
+
+
 
 #regression - Noah
 TICKER0
